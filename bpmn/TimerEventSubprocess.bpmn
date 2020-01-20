@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0str95f" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="TimerEventSubprocess" name="TimerEventSubprocess" isExecutable="true">
+    <bpmn:extensionElements>
+      <camunda:executionListener expression="#{execution.setVariable(&#39;duration&#39;,&#39;PT10S&#39;)}" event="start" />
+    </bpmn:extensionElements>
+    <bpmn:sequenceFlow id="SequenceFlow_0wdwibd" sourceRef="StartEvent_1" targetRef="Task_1gyyndd" />
+    <bpmn:endEvent id="EndEvent_08we3w8" name="Task done">
+      <bpmn:incoming>SequenceFlow_1jhdq1u</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1jhdq1u" sourceRef="Task_1gyyndd" targetRef="EndEvent_08we3w8" />
+    <bpmn:subProcess id="SubProcess_0cnb7fa" name="Timer Event Subprocess" triggeredByEvent="true">
+      <bpmn:sequenceFlow id="SequenceFlow_1s3zq6m" sourceRef="StartEvent_1mrb7e5" targetRef="Task_06fn8ft" />
+      <bpmn:endEvent id="EndEvent_0dts9ro">
+        <bpmn:incoming>SequenceFlow_1udfza7</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_1udfza7" sourceRef="Task_06fn8ft" targetRef="EndEvent_0dts9ro" />
+      <bpmn:scriptTask id="Task_06fn8ft" name="Remind User" scriptFormat="javascript">
+        <bpmn:incoming>SequenceFlow_1s3zq6m</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_1udfza7</bpmn:outgoing>
+        <bpmn:script>print('------ REMINDER ------')</bpmn:script>
+      </bpmn:scriptTask>
+      <bpmn:startEvent id="StartEvent_1mrb7e5" name="Reminder time" isInterrupting="false">
+        <bpmn:outgoing>SequenceFlow_1s3zq6m</bpmn:outgoing>
+        <bpmn:timerEventDefinition id="TimerEventDefinition_0fksz7a">
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">${duration}</bpmn:timeDuration>
+        </bpmn:timerEventDefinition>
+      </bpmn:startEvent>
+      <bpmn:association id="Association_0516d6y" sourceRef="StartEvent_1mrb7e5" targetRef="TextAnnotation_0phq32d" />
+      <bpmn:textAnnotation id="TextAnnotation_0phq32d">
+        <bpmn:text>Expression evaluation before variables are created, so init works only with static values in camunda 7.12.</bpmn:text>
+      </bpmn:textAnnotation>
+    </bpmn:subProcess>
+    <bpmn:startEvent id="StartEvent_1" name="Task required">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="duration" label="duration" type="string" defaultValue="PT1M" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0wdwibd</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_1gyyndd" name="Do something">
+      <bpmn:incoming>SequenceFlow_0wdwibd</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1jhdq1u</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:textAnnotation id="TextAnnotation_14cjg95">
+      <bpmn:text>Captures duration variable for reminder</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0c6jya9" sourceRef="StartEvent_1" targetRef="TextAnnotation_14cjg95" />
+  </bpmn:process>
+  <bpmn:message id="Message_0dc8fjh" name="Message_2e4oo1b" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="TimerEventSubprocess">
+      <bpmndi:BPMNEdge id="SequenceFlow_0wdwibd_di" bpmnElement="SequenceFlow_0wdwibd">
+        <di:waypoint x="215" y="207" />
+        <di:waypoint x="270" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_08we3w8_di" bpmnElement="EndEvent_08we3w8">
+        <dc:Bounds x="432" y="189" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="425" y="232" width="50" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jhdq1u_di" bpmnElement="SequenceFlow_1jhdq1u">
+        <di:waypoint x="370" y="207" />
+        <di:waypoint x="432" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SubProcess_0jdeinx_di" bpmnElement="SubProcess_0cnb7fa" isExpanded="true">
+        <dc:Bounds x="160" y="320" width="350" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1s3zq6m_di" bpmnElement="SequenceFlow_1s3zq6m">
+        <di:waypoint x="236" y="470" />
+        <di:waypoint x="290" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0dts9ro_di" bpmnElement="EndEvent_0dts9ro">
+        <dc:Bounds x="452" y="452" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1udfza7_di" bpmnElement="SequenceFlow_1udfza7">
+        <di:waypoint x="390" y="470" />
+        <di:waypoint x="452" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ScriptTask_0iyizpb_di" bpmnElement="Task_06fn8ft">
+        <dc:Bounds x="290" y="430" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0kyi8f2_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="189" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="165" y="232" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1tdo8ha_di" bpmnElement="Task_1gyyndd">
+        <dc:Bounds x="270" y="167" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0phq32d_di" bpmnElement="TextAnnotation_0phq32d">
+        <dc:Bounds x="190" y="350" width="270" height="52" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0516d6y_di" bpmnElement="Association_0516d6y">
+        <di:waypoint x="231" y="458" />
+        <di:waypoint x="295" y="402" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_14cjg95_di" bpmnElement="TextAnnotation_14cjg95">
+        <dc:Bounds x="190" y="80" width="100" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0c6jya9_di" bpmnElement="Association_0c6jya9">
+        <di:waypoint x="204" y="191" />
+        <di:waypoint x="224" y="148" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_0e0iet6_di" bpmnElement="StartEvent_1mrb7e5">
+        <dc:Bounds x="200" y="452" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="182" y="495" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
