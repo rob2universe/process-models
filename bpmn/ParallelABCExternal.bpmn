@@ -26,21 +26,21 @@
       <bpmn:incoming>SequenceFlow_1l0xwkc</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1l0xwkc" sourceRef="Task_Final" targetRef="EndEvent_1ff0tln" />
-    <bpmn:serviceTask id="Task_B" name="Perform B" camunda:asyncBefore="true" camunda:exclusive="false" camunda:type="external" camunda:topic="TopicB">
+    <bpmn:serviceTask id="Task_B" name="Perform B" camunda:asyncAfter="true" camunda:type="external" camunda:topic="TopicB">
       <bpmn:incoming>SequenceFlow_07j8cm0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0nupl9r</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_A" name="Perform A" camunda:asyncBefore="true" camunda:exclusive="false" camunda:type="external" camunda:topic="TopicA">
+    <bpmn:serviceTask id="Task_A" name="Perform A" camunda:asyncAfter="true" camunda:type="external" camunda:topic="TopicA">
       <bpmn:incoming>SequenceFlow_1aewz99</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1w4sx4a</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_0g0rqxs" sourceRef="ExclusiveGateway_16pdvm9" targetRef="Task_C" />
     <bpmn:sequenceFlow id="SequenceFlow_06ffykw" sourceRef="Task_C" targetRef="ExclusiveGateway_0udijo9" />
-    <bpmn:serviceTask id="Task_C" name="Perform C" camunda:asyncBefore="true" camunda:exclusive="false" camunda:type="external" camunda:topic="TopicC">
+    <bpmn:serviceTask id="Task_C" name="Perform C" camunda:asyncAfter="true" camunda:type="external" camunda:topic="TopicC">
       <bpmn:incoming>SequenceFlow_0g0rqxs</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_06ffykw</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_Final" name="Perform Final" camunda:class="org.camunda.example.service.LoggerDelegate">
+    <bpmn:serviceTask id="Task_Final" name="Perform Final" camunda:delegateExpression="${Logger}">
       <bpmn:incoming>SequenceFlow_04p1ikq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1l0xwkc</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -82,14 +82,14 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_04p1ikq_di" bpmnElement="SequenceFlow_04p1ikq">
         <di:waypoint x="645" y="190" />
-        <di:waypoint x="770" y="190" />
+        <di:waypoint x="680" y="190" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_1ff0tln_di" bpmnElement="EndEvent_1ff0tln">
-        <dc:Bounds x="932" y="172" width="36" height="36" />
+        <dc:Bounds x="832" y="172" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1l0xwkc_di" bpmnElement="SequenceFlow_1l0xwkc">
-        <di:waypoint x="870" y="190" />
-        <di:waypoint x="932" y="190" />
+        <di:waypoint x="780" y="190" />
+        <di:waypoint x="832" y="190" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_11nmydv_di" bpmnElement="Task_B">
         <dc:Bounds x="370" y="220" width="100" height="80" />
@@ -111,7 +111,7 @@
         <dc:Bounds x="370" y="360" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_00r423q_di" bpmnElement="Task_Final">
-        <dc:Bounds x="770" y="150" width="100" height="80" />
+        <dc:Bounds x="680" y="150" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
