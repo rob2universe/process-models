@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dinnerDecisions" name="Dinner Decisions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+  <decision id="beverages" name="Beverages">
+    <extensionElements>
+      <biodi:bounds x="156" y="81" width="180" height="80" />
+      <biodi:edge source="Decision_0v6lvdk">
+        <biodi:waypoints x="104" y="338" />
+        <biodi:waypoints x="163" y="264" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0pgvdj9">
+        <biodi:waypoints x="336" y="234" />
+        <biodi:waypoints x="289" y="161" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_0pgvdj9" />
+    </informationRequirement>
+    <decisionTable hitPolicy="COLLECT">
+      <input id="InputClause_1acmlkd" label="Dish" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_0bqgrlg" typeRef="string">
+          <text>desiredDish</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0bo3uen" label="Guests with children" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_0d6l79o" typeRef="boolean">
+          <text>guestsWithChildren</text>
+        </inputExpression>
+      </input>
+      <output id="OuputClause_99999" label="Beverages" name="beverages" typeRef="string" />
+      <rule id="row-506282952-7">
+        <description>Tough Stuff</description>
+        <inputEntry id="UnaryTests_03g3ci0">
+          <text>"Spareribs"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jb8hau">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kr45vj">
+          <text>"Aecht Schlenkerla Rauchbier"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-8">
+        <inputEntry id="UnaryTests_1ckv0bb">
+          <text>"Stew"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1joyits">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_139n7gl">
+          <text>"Guiness"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-9">
+        <inputEntry id="UnaryTests_05rspiy">
+          <text>"Roastbeef"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15yl6ki">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0bzfo47">
+          <text>"Bordeaux"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-10">
+        <inputEntry id="UnaryTests_0mk75lc">
+          <text>"Steak","Dry Aged Gourmet Steak","Light Salad and a nice Steak"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18uxmko">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00nwn3e">
+          <text>"Pinot Noir"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-11">
+        <inputEntry id="UnaryTests_11o8pqj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1298ow3">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0z18erz">
+          <text>"Apple Juice"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-12">
+        <inputEntry id="UnaryTests_0shocr0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nblyrk">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0s2fq8r">
+          <text>"Water"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0pgvdj9" name="Guests with children?">
+    <extensionElements>
+      <biodi:bounds x="284" y="234" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+</definitions>

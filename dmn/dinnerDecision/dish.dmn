@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dinnerDecisions" name="Dinner Decisions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+  <decision id="dish" name="Dish">
+    <extensionElements>
+      <biodi:bounds x="378" y="81" width="180" height="80" />
+      <biodi:edge source="KnowledgeSource_0b8hnqo">
+        <biodi:waypoints x="256" y="126" />
+        <biodi:waypoints x="378" y="119" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0rin549">
+        <biodi:waypoints x="372" y="240" />
+        <biodi:waypoints x="432" y="161" />
+      </biodi:edge>
+      <biodi:edge source="InputData_1axnom3">
+        <biodi:waypoints x="561" y="242" />
+        <biodi:waypoints x="503" y="161" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_0rin549" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_1axnom3" />
+    </informationRequirement>
+    <authorityRequirement>
+      <requiredAuthority href="#KnowledgeSource_0b8hnqo" />
+    </authorityRequirement>
+    <decisionTable id="DecisionTable_040j91i">
+      <input id="InputClause_0bbq1z8" label="Season" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_1iwaqcz" typeRef="string">
+          <text>season</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0pcbpc9" label="How many guests" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_1uu3xe6" typeRef="integer">
+          <text>guestCount</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0lfar1z" label="Dish" name="desiredDish" typeRef="string" />
+      <rule id="row-884555325-1">
+        <description>Default value</description>
+        <inputEntry id="UnaryTests_0cy7usy">
+          <text>not("Fall", "Winter", "Spring", "Summer")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ww352f">
+          <text>&gt;= 0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07xyqqp">
+          <text>"Instant Soup"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-1">
+        <inputEntry id="UnaryTests_06z2ju4">
+          <text>"Fall"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ph5qbt">
+          <text>&lt;= 8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0sntjhd">
+          <text>"Spareribs"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-2">
+        <inputEntry id="UnaryTests_0o5o0mm">
+          <text>"Winter"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rtyr8x">
+          <text>&lt;= 8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15nybba">
+          <text>"Roastbeef"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-3">
+        <inputEntry id="UnaryTests_1f00omt">
+          <text>"Spring"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03yxt5d">
+          <text>&lt;= 4</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ki86jo">
+          <text>"Dry Aged Gourmet Steak"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-4">
+        <description>Save money</description>
+        <inputEntry id="UnaryTests_18csep1">
+          <text>"Spring"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lt4o3q">
+          <text>[5..8]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h969t1">
+          <text>"Steak"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-5">
+        <description>Less effort</description>
+        <inputEntry id="UnaryTests_0cp9scy">
+          <text>"Fall","Winter","Spring"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1to1xxg">
+          <text>&gt; 8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fjt4uo">
+          <text>"Stew"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-506282952-6">
+        <description>Hey, why not?</description>
+        <inputEntry id="UnaryTests_0s5azk4">
+          <text>"Summer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nuzyri">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nspzk1">
+          <text>"Light Salad and a nice Steak"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0rin549" name="Season">
+    <extensionElements>
+      <biodi:bounds x="291" y="240" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_1axnom3" name="Number of Guests">
+    <extensionElements>
+      <biodi:bounds x="514" y="242" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <knowledgeSource id="KnowledgeSource_0b8hnqo" name="Men&#39;s Cookbook">
+    <extensionElements>
+      <biodi:bounds x="156" y="94" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+</definitions>
