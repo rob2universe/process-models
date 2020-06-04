@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0uwdayj" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.3">
+  <decision id="Decision_UpperCase" name="Upper Case example">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="input_1" label="Name" camunda:inputVariable="name">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>substring(input1,2,3)</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1g066hr">
+        <inputExpression id="LiteralExpression_1ls0abv" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Result" name="result" typeRef="string" />
+      <rule id="DecisionRule_1nvoiyw">
+        <inputEntry id="UnaryTests_0le01qp">
+          <text>upper case(name) = "BOB"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16ojv30">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0oys5vp">
+          <text>"BOB"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1d2so47">
+        <inputEntry id="UnaryTests_0btpkle">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14vopu0">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1getzff">
+          <text>input1</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
