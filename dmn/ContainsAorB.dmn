@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_093gp5v" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.3.0">
+  <decision id="MyDecision" name="My Decision">
+    <decisionTable id="DecisionTable_11mhzt9" hitPolicy="COLLECT">
+      <input id="Input_1" label="My Text">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>myText</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="Result" typeRef="string" />
+      <rule id="DecisionRule_14ioo8t">
+        <inputEntry id="UnaryTests_0ltytx1">
+          <text>contains(cellInput, "A")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1710kw6">
+          <text>"A"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_12feoli">
+        <inputEntry id="UnaryTests_0ulkuu2">
+          <text>contains(cellInput, "B") </text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08nrg9c">
+          <text>"B"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ls54hc">
+        <inputEntry id="UnaryTests_11zpmf8">
+          <text>contains(cellInput, "A") and contains(cellInput, "B")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1315iyo">
+          <text>"A and B"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="MyDecision">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
