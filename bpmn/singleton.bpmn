@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1gs7oec" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.14.0">
+  <bpmn:process id="SingletonProcess" name="Singleton" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_12ya0n8</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_12ya0n8" sourceRef="StartEvent_1" targetRef="Gateway_1df5shk" />
+    <bpmn:exclusiveGateway id="Gateway_1df5shk" default="FirstProcessInstanceSequenceFlow">
+      <bpmn:incoming>Flow_12ya0n8</bpmn:incoming>
+      <bpmn:outgoing>FirstProcessInstanceSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>RunningInstanceExistsSequenceFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="FirstProcessInstanceSequenceFlow" name="First process instance" sourceRef="Gateway_1df5shk" targetRef="DoSoemthingTask" />
+    <bpmn:sequenceFlow id="RunningInstanceExistsSequenceFlow" name="Running instance exists" sourceRef="Gateway_1df5shk" targetRef="InstanceAlreadyExistsEndEvent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${historyService.createHistoricProcessInstanceQuery().processDefinitionKey(execution.getProcessDefinitionId().split(":")[0]).active().count() &gt; 0}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="InstanceAlreadyExistsEndEvent" name="Instance already exists">
+      <bpmn:incoming>RunningInstanceExistsSequenceFlow</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="OnlyInstanceEndedEndEvent" name="Only instance ended">
+      <bpmn:incoming>Flow_1g3t9r6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1g3t9r6" sourceRef="DoSoemthingTask" targetRef="OnlyInstanceEndedEndEvent" />
+    <bpmn:userTask id="DoSoemthingTask" name="Do something">
+      <bpmn:incoming>FirstProcessInstanceSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_1g3t9r6</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SingletonProcess">
+      <bpmndi:BPMNEdge id="Flow_12ya0n8_di" bpmnElement="Flow_12ya0n8">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="255" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07ds3a2_di" bpmnElement="FirstProcessInstanceSequenceFlow">
+        <di:waypoint x="305" y="117" />
+        <di:waypoint x="430" y="117" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="336" y="86" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02549s8_di" bpmnElement="RunningInstanceExistsSequenceFlow">
+        <di:waypoint x="280" y="142" />
+        <di:waypoint x="280" y="230" />
+        <di:waypoint x="412" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="287" y="196" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1g3t9r6_di" bpmnElement="Flow_1g3t9r6">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="582" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1df5shk_di" bpmnElement="Gateway_1df5shk" isMarkerVisible="true">
+        <dc:Bounds x="255" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pw512z_di" bpmnElement="DoSoemthingTask">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1fmfs8i_di" bpmnElement="InstanceAlreadyExistsEndEvent">
+        <dc:Bounds x="412" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="389" y="255" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_062u6nu_di" bpmnElement="OnlyInstanceEndedEndEvent">
+        <dc:Bounds x="582" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="567" y="142" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
