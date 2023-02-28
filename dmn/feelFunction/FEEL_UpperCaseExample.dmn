@@ -15,6 +15,11 @@
           <text></text>
         </inputExpression>
       </input>
+      <input id="InputClause_0xurltu" label="Enabled">
+        <inputExpression id="LiteralExpression_1kpe3fw" typeRef="boolean">
+          <text>true</text>
+        </inputExpression>
+      </input>
       <output id="output_1" label="Result" name="result" typeRef="string" />
       <rule id="DecisionRule_1nvoiyw">
         <inputEntry id="UnaryTests_0le01qp">
@@ -23,8 +28,11 @@
         <inputEntry id="UnaryTests_16ojv30">
           <text></text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1k8ptgl">
+          <text>true</text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0oys5vp">
-          <text>"BOB"</text>
+          <text>"The real BOB"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1d2so47">
@@ -32,6 +40,9 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_14vopu0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18esjar">
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1getzff">
